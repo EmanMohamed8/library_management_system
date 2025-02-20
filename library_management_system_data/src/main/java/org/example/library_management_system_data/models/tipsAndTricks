@@ -1,0 +1,8 @@
+@JoinColumn(name = "") => JPA Annotation to specify a foreign key in both the OneToMany and ManyToOne tables and without type it the jpa will automatically build a new tables that relate the tables with each other
+Cascade =>
+
+
+
+Dependency Injection:
+
+Constructor
