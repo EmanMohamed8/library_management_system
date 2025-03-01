@@ -1,13 +1,14 @@
 package org.example.library_management_system_api.services.jpa;
 
 import org.example.library_management_system_api.services.ICRUDService;
+import org.example.library_management_system_data.models.Patron;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
-public class CRUDService<T, ID> implements ICRUDService<T, ID> {
+public abstract class CRUDService<T, ID> implements ICRUDService<T, ID> {
     JpaRepository<T, ID> repository;
 
     public CRUDService(JpaRepository<T, ID> repository) {
@@ -38,5 +39,4 @@ public class CRUDService<T, ID> implements ICRUDService<T, ID> {
     public void delete(T object) {
         repository.delete(object);
     }
-
 }
