@@ -19,7 +19,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Book> getBooks(){
         return bookService.getAllBooks();
     }
@@ -29,17 +29,17 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public Book addBook(Book book){
         return bookService.addBook(book);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public Book updateBook(Long id){
         return bookService.updateBook(id);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void deleteBook(Long id){
         bookService.deleteBookById(id);
     }
