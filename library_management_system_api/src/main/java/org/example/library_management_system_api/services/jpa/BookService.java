@@ -37,8 +37,7 @@ public class BookService extends CRUDService<Book, Long> implements IBookService
     }
 
     @Override
-    public Book updateBook(Long Id) {
-        Book book = getBookById(Id);
+    public Book updateBook(Book book) {
         return bookRepository.save(book);
     }
 
