@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 public interface IPatronService extends ICRUDService<Patron, Long> {
-    public List<Patron> getPatrons();
-    public Patron getPatronById(Long id);
-    public Patron createPatron(Patron patron);
-    public Patron updatePatron(Long id);
-    public void deletePatron(Long id);
+    List<Patron> getPatrons();
+    Patron getPatronById(Long id);
+    Patron createPatron(Patron patron);
+    Patron updatePatron(Long id, Patron patron);
+    void deletePatron(Long id);
 }

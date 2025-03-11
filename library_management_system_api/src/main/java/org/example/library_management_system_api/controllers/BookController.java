@@ -4,12 +4,12 @@ import org.example.library_management_system_api.services.IBookService;
 import org.example.library_management_system_data.dto.BookDto;
 import org.example.library_management_system_data.models.Book;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@AllArgsConstructor
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -28,15 +28,29 @@ public class BookController {
                 .map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
     }
 
+//    @GetMapping("")
+//    public ResponseEntity<?> getAllBooks() {
+//        return ResponseEntity.ok(bookService.getAllBooks());
+//    }
+
     @GetMapping("/{id}")
     public BookDto getBookById(@PathVariable Long id){
         return modelMapper.map(bookService.getBookById(id), BookDto.class);
     }
 
     @PostMapping("")
-    public Book addBook(@RequestBody BookDto bookDto) {
-        return bookService.addBook(modelMapper.map(bookDto, Book.class));
+    public BookDto addBook(@RequestBody BookDto bookDto) {
+        Book savedBook =  bookService.addBook(modelMapper.map(bookDto, Book.class));
+        return modelMapper.map(savedBook, BookDto.class);
     }
+
+
+//    @PostMapping("")
+//    public ResponseEntity<?> addBook(@RequestBody  BookDto bookDto) {
+//        Book book = modelMapper.map(bookDto, Book.class);
+//        return ResponseEntity.ok(bookService.addBook(book));
+//    }
+
 
     @PutMapping("/{id}")
     public Book updateBook(@PathVariable Long id, @RequestBody BookDto bookDto){

@@ -7,6 +7,7 @@ import org.example.library_management_system_data.repositories.PatronRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatronService extends CRUDService<Patron, Long> implements IPatronService {
@@ -33,10 +34,17 @@ public class PatronService extends CRUDService<Patron, Long> implements IPatronS
     }
 
     @Override
-    public Patron updatePatron(Long id) {
-        Patron patron = patronRepository.findById(id).orElse(null);
-        assert patron != null;
-        return patronRepository.save(patron);
+    public Patron updatePatron(Long id, Patron patron) {
+        Optional<Patron> patronById = patronRepository.findById(id);
+        if(patronById.isPresent()){
+            Patron updatedPatron = patronById.get();
+            updatedPatron.setId(patron.getId());
+            updatedPatron.setFirstName(patron.getFirstName());
+            updatedPatron.setLastName(patron.getLastName());
+            updatedPatron.setPhoneNumber(patron.getPhoneNumber());
+            return patronRepository.save(updatedPatron);
+        }
+        return null;
     }
 
     @Override
