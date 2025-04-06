@@ -12,6 +12,15 @@
         </processorPath>
         <module name="Library_Management_System" />
       </profile>
+      <profile name="Annotation profile for Library_Management_System_api" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="Library_Management_System_api" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="library_management_system_api" target="17" />
@@ -21,6 +30,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Library_Management_System" options="-parameters" />
+      <module name="Library_Management_System_api" options="-parameters" />
       <module name="library_management_system_api" options="-parameters" />
       <module name="library_management_system_data" options="-parameters" />
     </option>
