@@ -1,5 +1,6 @@
 package org.example.library_management_system_api.services.jpa;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Id;
 import org.example.library_management_system_api.services.IPatronService;
 import org.example.library_management_system_data.models.Patron;
@@ -18,33 +19,46 @@ public class PatronService extends CRUDService<Patron, Long> implements IPatronS
         this.patronRepository = patronRepository;
     }
 
+//  read all patrons
     @Override
     public List<Patron> getPatrons() {
         return patronRepository.findAll();
     }
 
+//  read patron by id
     @Override
     public Patron getPatronById(Long id) {
         return patronRepository.findById(id).orElse(null);
     }
 
+//  save new patron
     @Override
     public Patron createPatron(Patron patron) {
         return patronRepository.save(patron);
     }
 
+//  update patron
     @Override
     public Patron updatePatron(Long id, Patron patron) {
-        Optional<Patron> patronById = patronRepository.findById(id);
-        if(patronById.isPresent()){
-            Patron updatedPatron = patronById.get();
-            updatedPatron.setId(patron.getId());
-            updatedPatron.setFirstName(patron.getFirstName());
-            updatedPatron.setLastName(patron.getLastName());
-            updatedPatron.setPhoneNumber(patron.getPhoneNumber());
-            return patronRepository.save(updatedPatron);
+//      check if patron exists
+        Patron savedPatron = patronRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Patron Not Exists"));
+
+//      update fields
+        if(patron.getPhoneNumber() != null){
+            savedPatron.setPhoneNumber(patron.getPhoneNumber());
         }
-        return null;
+        if(patron.getEmail() != null){
+            savedPatron.setEmail(patron.getEmail());
+        }
+        if (patron.getFirstName() != null){
+            savedPatron.setFirstName(patron.getFirstName());
+        }
+        if (patron.getLastName() != null){
+            savedPatron.setLastName(patron.getLastName());
+        }
+
+        return patronRepository.save(savedPatron);
     }
 
     @Override

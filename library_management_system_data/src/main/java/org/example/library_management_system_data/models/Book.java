@@ -1,5 +1,6 @@
 package org.example.library_management_system_data.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,12 +19,15 @@ public class Book extends BaseEntity{
     private String title;
     @Column(name = "author")
     private String author;
-    @Column(name = "isbn")
-    private String isbn;
     @Column(name = "publisher")
     private String publisher;
     @Column(name = "publisher_year")
-    private String publisher_year;
+    private String publisherYear;
+    @Column(name = "isbn")
+    private String isbn;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<BorrowingRecord> borrowingRecords = new HashSet<>();
 
     public String getTitle() {
         return title;
@@ -41,8 +45,8 @@ public class Book extends BaseEntity{
         return publisher;
     }
 
-    public String getPublisher_year() {
-        return publisher_year;
+    public String getPublisherYear() {
+        return publisherYear;
     }
 
     public Set<BorrowingRecord> getBorrowingRecords() {
@@ -53,8 +57,8 @@ public class Book extends BaseEntity{
         this.borrowingRecords = borrowingRecords;
     }
 
-    public void setPublisher_year(String publisher_year) {
-        this.publisher_year = publisher_year;
+    public void setPublisherYear(String publisher_year) {
+        this.publisherYear = publisher_year;
     }
 
     public void setPublisher(String publisher) {
@@ -73,8 +77,4 @@ public class Book extends BaseEntity{
         this.title = title;
     }
 
-    @OneToMany
-    @JoinColumn(name = "book_id")
-
-    Set<BorrowingRecord> borrowingRecords = new HashSet<>();
 }

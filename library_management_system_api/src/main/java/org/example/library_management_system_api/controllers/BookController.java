@@ -28,11 +28,6 @@ public class BookController {
                 .map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
     }
 
-//    @GetMapping("")
-//    public ResponseEntity<?> getAllBooks() {
-//        return ResponseEntity.ok(bookService.getAllBooks());
-//    }
-
     @GetMapping("/{id}")
     public BookDto getBookById(@PathVariable Long id){
         return modelMapper.map(bookService.getBookById(id), BookDto.class);
@@ -44,17 +39,9 @@ public class BookController {
         return modelMapper.map(savedBook, BookDto.class);
     }
 
-
-//    @PostMapping("")
-//    public ResponseEntity<?> addBook(@RequestBody  BookDto bookDto) {
-//        Book book = modelMapper.map(bookDto, Book.class);
-//        return ResponseEntity.ok(bookService.addBook(book));
-//    }
-
-
     @PutMapping("/{id}")
     public Book updateBook(@PathVariable Long id, @RequestBody BookDto bookDto){
-        return bookService.updateBook(modelMapper.map(bookDto, Book.class));
+        return bookService.updateBook(id, modelMapper.map(bookDto, Book.class));
     }
 
     @DeleteMapping("/{id}")

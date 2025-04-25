@@ -1,5 +1,6 @@
 package org.example.library_management_system_data.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class BorrowingRecord extends BaseEntity{
     @JoinColumn(name = "book_id")
     private Book book;
     @Column(name = "borrowing_date")
-    private LocalDateTime borrowDate;
+    private LocalDateTime borrowingDate;
     @Column(name = "return_date")
     private LocalDateTime returnDate;
 
@@ -42,12 +43,12 @@ public class BorrowingRecord extends BaseEntity{
         this.book = book;
     }
 
-    public LocalDateTime getBorrowDate() {
-        return borrowDate;
+    public LocalDateTime getBorrowingDate() {
+        return borrowingDate;
     }
 
-    public void setBorrowDate(LocalDateTime borrowDate) {
-        this.borrowDate = borrowDate;
+    public void setBorrowingDate(LocalDateTime borrowDate) {
+        this.borrowingDate = borrowDate;
     }
 
     public LocalDateTime getReturnDate() {

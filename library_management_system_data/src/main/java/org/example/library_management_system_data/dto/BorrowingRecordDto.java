@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @Data
 public class BorrowingRecordDto implements Serializable {
     private Long id;
-    private Patron patron;
-    private Book book;
+    private PatronDto patronDto;
+    private BookDto bookDto;
     private LocalDateTime borrowingDate;
     private LocalDateTime returnDate;
 
@@ -23,20 +23,20 @@ public class BorrowingRecordDto implements Serializable {
         this.id = id;
     }
 
-    public Patron getPatron() {
-        return patron;
+    public BookDto getBookDto() {
+        return bookDto;
     }
 
-    public void setPatron(Patron patron) {
-        this.patron = patron;
+    public void setBookDto(BookDto bookDto) {
+        this.bookDto = bookDto;
     }
 
-    public Book getBook() {
-        return book;
+    public PatronDto getPatronDto() {
+        return patronDto;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setPatronDto(PatronDto patronDto) {
+        this.patronDto = patronDto;
     }
 
     public LocalDateTime getBorrowingDate() {

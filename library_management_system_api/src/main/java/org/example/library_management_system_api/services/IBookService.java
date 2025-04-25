@@ -10,6 +10,6 @@ public interface IBookService extends ICRUDService<Book, Long>{
     List<Book> getAllBooks();
     Book getBookById(Long Id);
     Book addBook(Book book);
-    Book updateBook(Book book);
+    Book updateBook(Long bookId, Book book);
     void deleteBookById(Long Id);
 }

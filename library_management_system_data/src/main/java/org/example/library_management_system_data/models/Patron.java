@@ -1,5 +1,6 @@
 package org.example.library_management_system_data.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +10,6 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -24,9 +23,10 @@ public class Patron extends BaseEntity{
     private String phoneNumber;
     @Column(name = "email")
     private String email;
-    @OneToMany
-    @JoinColumn(name = "patron_id")
-    Set<BorrowingRecord> borrowingRecords = new HashSet<>();
+    @Column(name = "address")
+    private String address;
+    @OneToMany(mappedBy = "patron", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BorrowingRecord> borrowingRecords = new HashSet<>();
 
     public String getFirstName() {
         return firstName;
@@ -66,5 +66,13 @@ public class Patron extends BaseEntity{
 
     public void setBorrowingRecords(Set<BorrowingRecord> borrowingRecords) {
         this.borrowingRecords = borrowingRecords;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

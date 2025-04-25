@@ -15,6 +15,7 @@ public class BookDto implements Serializable {
     private String title;
     private String author;
     private String publisher;
+    private String publishedYear;
     private String isbn;
 
     public Long getId() {
