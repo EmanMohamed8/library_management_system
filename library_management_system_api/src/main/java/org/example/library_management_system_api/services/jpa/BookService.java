@@ -2,12 +2,14 @@ package org.example.library_management_system_api.services.jpa;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Id;
+import org.example.library_management_system_api.exception.BookNotFoundException;
 import org.example.library_management_system_api.services.IBookService;
 import org.example.library_management_system_data.models.Book;
 import org.example.library_management_system_data.models.Patron;
 import org.example.library_management_system_data.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
@@ -30,9 +32,8 @@ public class BookService extends CRUDService<Book, Long> implements IBookService
 //  read by book id
     @Override
     public Book getBookById(Long Id) {
-        return bookRepository.findById(Id).orElse(null);
+        return bookRepository.findById(Id).orElseThrow(() -> new BookNotFoundException());
     }
-
 //  save book
     @Override
     public Book addBook(Book book) {

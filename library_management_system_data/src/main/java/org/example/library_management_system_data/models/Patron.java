@@ -2,6 +2,7 @@ package org.example.library_management_system_data.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Patron extends BaseEntity{
     private String lastName;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @Email(message = "Invalid email format")
     @Column(name = "email")
     private String email;
     @Column(name = "address")

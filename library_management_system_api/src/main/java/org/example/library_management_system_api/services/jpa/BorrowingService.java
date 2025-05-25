@@ -62,6 +62,7 @@ public class BorrowingService extends CRUDService<BorrowingRecord, Long> impleme
         return borrowingRecordRepository.save(borrowingRecord);
     }
 
+    @Transactional
     @Override
     public BorrowingRecord updateBorrowingRecord(Long bookId, Long PatronId, BorrowingRecord borrowingRecord) {
         if(borrowingRecord.getId() == null){
