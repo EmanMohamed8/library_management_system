@@ -32,7 +32,7 @@ public class BookService extends CRUDService<Book, Long> implements IBookService
 //  read by book id
     @Override
     public Book getBookById(Long Id) {
-        return bookRepository.findById(Id).orElseThrow(() -> new BookNotFoundException());
+        return bookRepository.findById(Id).orElseThrow(() -> new BookNotFoundException(Id));
     }
 //  save book
     @Override
