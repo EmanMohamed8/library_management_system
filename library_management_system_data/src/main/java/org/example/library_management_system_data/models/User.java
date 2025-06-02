@@ -1,11 +1,11 @@
 package org.example.library_management_system_data.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class User extends BaseEntity{
     String userName;
     @Column(name = "password", nullable = false)
     String password;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     String email;
     @Column(name = "phone")
     String phone;
@@ -32,6 +32,11 @@ public class User extends BaseEntity{
     String zip;
     @Column(name = "country")
     String country;
+    @ManyToMany
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
     public User() {}
 
     public String getName() {
